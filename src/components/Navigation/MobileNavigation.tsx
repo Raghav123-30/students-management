@@ -30,7 +30,7 @@ const MobileNavigation = () => {
   const toggle = () => setIsDrawerOpen(!isDrawerOpen);
   const { setIsAuthenticated } = useAuth();
   return (
-    <div className="drawer drawer-end">
+    <div className="drawer drawer-end z-50">
       <input
         id="my-drawer-4"
         type="checkbox"
