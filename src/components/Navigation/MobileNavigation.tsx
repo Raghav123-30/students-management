@@ -1,12 +1,14 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
+import { useAuth } from "@/context/AuthContext";
 
 import { MdMenu, MdClose } from "react-icons/md";
 
 const MobileNavigation = () => {
   const [isDrawerOpen, setDrawerOpen] = useState(false);
   const toggle = () => setDrawerOpen(!isDrawerOpen);
+  const { setIsAuthenticated } = useAuth();
   return (
     <div className="drawer drawer-end">
       <input
@@ -34,7 +36,6 @@ const MobileNavigation = () => {
           <Link
             href={"/"}
             className="font-semibold  px-4 py-2 rounded w-28"
-            aria-label="close sidebar"
             onClick={toggle}
           >
             Dashboard
@@ -53,7 +54,10 @@ const MobileNavigation = () => {
           >
             Courses
           </Link>
-          <button className="btn btn-primary " onClick={toggle}>
+          <button
+            className="btn btn-primary "
+            onClick={() => setIsAuthenticated(false)}
+          >
             Logout
           </button>
         </ul>

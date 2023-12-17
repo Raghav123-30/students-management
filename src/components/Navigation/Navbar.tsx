@@ -1,8 +1,12 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import MobileNavigation from "./MobileNavigation";
+import { useAuth } from "@/context/AuthContext";
 
 const Navbar = () => {
+  const { setIsAuthenticated } = useAuth();
   return (
     <>
       <div className="md:flex hidden navbar bg-base-100 md:px-8 lg:px-16 xl:px-24">
@@ -23,7 +27,12 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="navbar-end">
-          <button className="btn btn-primary">Logout</button>
+          <button
+            className="btn btn-primary"
+            onClick={() => setIsAuthenticated(false)}
+          >
+            Logout
+          </button>
         </div>
       </div>
       <div className="flex md:hidden">
