@@ -5,9 +5,29 @@ import { useAuth } from "@/context/AuthContext";
 
 import { MdMenu, MdClose } from "react-icons/md";
 
+type Route = {
+  title: string;
+  route: string;
+};
+
+const links: Route[] = [
+  {
+    title: "Dashboard",
+    route: "/dashboard",
+  },
+  {
+    title: "Courses",
+    route: "/courses",
+  },
+  {
+    title: "Tasks",
+    route: "/tasks",
+  },
+];
+
 const MobileNavigation = () => {
-  const [isDrawerOpen, setDrawerOpen] = useState(false);
-  const toggle = () => setDrawerOpen(!isDrawerOpen);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const toggle = () => setIsDrawerOpen(!isDrawerOpen);
   const { setIsAuthenticated } = useAuth();
   return (
     <div className="drawer drawer-end">
@@ -33,30 +53,23 @@ const MobileNavigation = () => {
           className="drawer-overlay"
         ></label>
         <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content flex gap-4 flex-col justify-center items-center">
-          <Link
-            href={"/"}
-            className="font-semibold  px-4 py-2 rounded w-28"
-            onClick={toggle}
-          >
-            Dashboard
-          </Link>
-          <Link
-            href={"/"}
-            className="font-semibold w-28 px-4 py-2 rounded "
-            onClick={toggle}
-          >
-            Tasks
-          </Link>
-          <Link
-            href={"/"}
-            className="font-semibold w-28 px-4 py-2 rounded "
-            onClick={toggle}
-          >
-            Courses
-          </Link>
+          {links.map((item) => (
+            <Link
+              href={item.route}
+              className="font-semibold  px-4 py-2 rounded w-28"
+              onClick={toggle}
+              key={item.title}
+            >
+              {item.title}
+            </Link>
+          ))}
+
           <button
             className="btn btn-primary "
-            onClick={() => setIsAuthenticated(false)}
+            onClick={() => {
+              localStorage.removeItem("isAuthenticated");
+              setIsAuthenticated(false);
+            }}
           >
             Logout
           </button>

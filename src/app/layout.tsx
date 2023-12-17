@@ -5,7 +5,7 @@ import "./globals.css";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navigation/Navbar";
 
-import AppWrapper from "@/components/security/AppWrapper";
+import AppWrapper from "@/components/Security/AppWrapper";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {

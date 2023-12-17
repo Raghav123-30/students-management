@@ -8,6 +8,7 @@ const Landing = ({ setUserName, setIsAuthenticated }: Props) => {
   const onAuthentication = () => {
     console.log("handling authentication");
     setIsAuthenticated(true);
+    localStorage.setItem("isAuthenticated", "true");
   };
   return (
     <div
@@ -27,7 +28,10 @@ const Landing = ({ setUserName, setIsAuthenticated }: Props) => {
           placeholder="Password"
           className="input input-bordered w-full max-w-xs input-secondary"
         />
-        <button className="btn btn-primary" onClick={onAuthentication}>
+        <button
+          className="btn btn-success text-white"
+          onClick={onAuthentication}
+        >
           LogIn
         </button>
         <p className=" hover:underline">Forgotten your username or password?</p>

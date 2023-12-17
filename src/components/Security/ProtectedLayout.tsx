@@ -1,7 +1,7 @@
 "use client";
 import { useAuth } from "@/context/AuthContext";
 import Landing from "./Landing";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ToggleTheme from "../ToggleTheme";
 type Props = {
   children: React.ReactNode;
@@ -18,6 +18,12 @@ const AuthenticatedLayout = ({ children }: Props) => {
   const onThemeChanged = () => {
     setTheme((prev) => (prev == themes.LIGHT ? themes.DARK : themes.LIGHT));
   };
+  useEffect(() => {
+    let item = localStorage.getItem("isAuthenticated");
+    if (item) {
+      setIsAuthenticated(true);
+    }
+  }, []);
   if (isAuthenticated) {
     return (
       <div className="main-container" data-theme={theme}>
