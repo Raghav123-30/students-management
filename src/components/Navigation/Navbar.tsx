@@ -4,6 +4,8 @@ import React from "react";
 import Link from "next/link";
 import MobileNavigation from "./MobileNavigation";
 import { useAuth } from "@/context/AuthContext";
+import { useRouter } from "next/navigation";
+
 type Route = {
   title: string;
   route: string;
@@ -24,7 +26,18 @@ const links: Route[] = [
   },
 ];
 const Navbar = () => {
-  const { setIsAuthenticated } = useAuth();
+  const router = useRouter();
+  const { setIsAuthenticated, logOut } = useAuth();
+
+  const handleLogout = async () => {
+    try {
+      await logOut();
+      console.log("logged out");
+      setIsAuthenticated(false);
+    } catch (e: any) {
+      console.log(e);
+    }
+  };
   return (
     <>
       <div className="md:flex hidden navbar bg-base-100 md:px-8 lg:px-16 xl:px-24  ">
@@ -41,13 +54,7 @@ const Navbar = () => {
           ))}
         </div>
         <div className="navbar-end">
-          <button
-            className="btn btn-primary"
-            onClick={() => {
-              localStorage.removeItem("isAuthenticated");
-              setIsAuthenticated(false);
-            }}
-          >
+          <button className="btn btn-primary" onClick={handleLogout}>
             Logout
           </button>
         </div>

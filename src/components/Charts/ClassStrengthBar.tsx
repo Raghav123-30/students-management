@@ -39,7 +39,7 @@ const data = {
   labels: schoolStrengthData.map((item) => item.grade), // Use an array for labels
   datasets: [
     {
-      label: "Strength",
+      label: "strength",
       data: schoolStrengthData.map((item) => item.strength),
       backgroundColor: colors,
       borderColor: colors,
