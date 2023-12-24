@@ -13,20 +13,24 @@ const Landing = () => {
     setLoading(true);
     console.log("hook is running");
 
-    const unSubscribe = onAuthStateChanged(auth, (userName) => {
-      console.log(userName);
+    const interval = setInterval(
+      onAuthStateChanged(auth, (userName) => {
+        console.log(userName);
 
-      if (userName) {
-        setIsAuthenticated(true);
-      }
+        if (userName) {
+          setIsAuthenticated(true);
+        }
 
-      setLoading(false);
-      setAuthChecked(true);
-    });
+        setLoading(false);
+        setAuthChecked(true);
+      }),
 
-    return () => {
-      unSubscribe();
-    };
+      100000
+    );
+
+    console.log("ran auth check!!!!!");
+
+    return () => clearInterval(interval);
   }, []);
 
   const { loginUser } = useAuth();
